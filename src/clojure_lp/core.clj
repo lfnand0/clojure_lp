@@ -31,7 +31,7 @@
 (defn condicionais-2
   ; Condicionais: múltiplas condicionais
 
-  ; Cond: (cond (condição 1) retorno1 (condição 2) retorno2 :else retorno3)
+  ; Cond: (cond (condição 1) retorno1 (condição 2) retorno2 ... :else retornoN)
   ; Podemos colocar quantas condições forem necessárias
   ; O :else é utilizado para os casos no qual todas as condicionais são false
   [valor]
@@ -39,6 +39,19 @@
     (= valor 1) "Valor é 1"
     (= valor 2) "Valor é 2"
     :else "Valor não é 1 nem 2"))
+
+(defn condicionais-3
+  [valor]
+  ; Condicionais: switch-case
+
+  ; Case: (case x valor1 retorno1 valor2 retorno2 ... default)
+  ; Caso o valor de x for igual a valor1, a função case retorna retorno1, se não 
+  ; continua checando até achar algum valor igual ou, caso não encontre, retorna 
+  ; o default (opcional)
+  (case valor
+    1 "Valor é 1"
+    2 "Valor é 2"
+    "Valor não é 1 nem 2"))
 
 
 (defn variavel
@@ -51,26 +64,33 @@
   (let [y 3
         z 0.4]
     (+ @x y z w)))
-(def mapa
-  ; Para criar um mapa (ou vetor) em clojure, utilizamos [], separando cada item do mapa com um new line
-  ; Para criar objetos, usamos o template {:atributo valor :atributo2 valor2}
+
+; ESTRUTURAS DE DADOS
+; (1 2 3 4 5)                 | List
+; ["a" "b" "c" "d" "e"]       | Vector
+; {:nome "Nome" :valor 123}   | Map
+; #{5 1 4 2 3}                | Set
+
+(def vetor
+  ; Para criar um vetor  em clojure, utilizamos [], separando cada item do vetor com um new line
+  ; Para criar mapas, usamos o padrão {:atributo valor :atributo2 valor2}
   [{:nome "atr1" :valor 1}
    {:nome "atr2" :valor 2}
    {:nome "atr3" :valor 3.33}])
 
-(defn atributo-mapa
-  [mapa]
-  (map :nome mapa)
-  ; A função map funciona recebe dois parâmetros, o nome de um atributo e um mapa,
-  ; e retorna o valor desse atributo para cada posição no mapa.
+(defn atributo-vetor
+  [vetor]
+  (map :nome vetor)
+  ; A função map funciona recebe dois parâmetros, o nome de um atributo e um vetor,
+  ; e retorna o valor desse atributo para cada mapa no vetor.
   ; É uma espécie de "for each"
   )
 
-(defn acessar-mapa
-  [mapa pos]
-  (get mapa pos)
-  ; A função get recebe um mapa e uma posição, e retorna o valor dessa posição
-  ; no mapa. A primeira posição de um mapa em Clojure é 0  
+(defn acessar-vetor
+  [vetor pos]
+  (get vetor pos)
+  ; A função get recebe um vetor e uma posição, e retorna o valor dessa posição
+  ; no vetor. A primeira posição de um vetor em Clojure é 0  
   )
 
 (defn while-loop
@@ -99,9 +119,13 @@
   (println (condicionais-2 1))
   (println (condicionais-2 2))
   (println (condicionais-2 3))
+  (println "Condicionais 3: ")
+  (println (condicionais-3 1))
+  (println (condicionais-3 2))
+  (println (condicionais-3 3))
   (print "Variáveis: ") (println (variavel 100))
-  (print "Mapa: ") (println mapa)
-  (print "Posição 1 do mapa: ") (println (acessar-mapa mapa 1))
-  (print "Atributos \"nome\" no mapa: ") (println (atributo-mapa mapa))
+  (print "Vetor: ") (println vetor)
+  (print "Posição 1 do vetor: ") (println (acessar-vetor vetor 1))
+  (print "Valor do atributo \"nome\" nos mapas do vetor: ") (println (atributo-vetor vetor))
   (print "While loop: ");
   (while-loop 5))
